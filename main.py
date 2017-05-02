@@ -1,4 +1,4 @@
-# !/usr/python3
+# !/usr/local/bin/python3
 
 PIECES = {'X' : 1, 'O': 2}
 
@@ -22,32 +22,65 @@ class Board:
 				self.grid[x][y] = piece
 
 	def print_board(self):
-		print(self.grid)
-		for i in range (0, self.size):
-			for j in range (0, self.size):
-				print(self.grid[i][j])
+		for i in range(0, self.size):
+			print('\n-----------')
+			for j in range(0, self.size):
+				print(self.grid[i][j] + ' |', end=" ")
 
-def winning_piece(*lists):
-	for each_list in lists:
-		if(len(each_list) > 0):
-			reduced = list(set(each_list))
-			if(each_list[0] == '$' and len(reduced) != 1):
-				break
-			return reduced[0]
-
+# grid[0][i] top col
+# grid[i][0] left col
+# grid[i][board_size - 1] right col
+# grid[i][i] left diag
+# grid[i][board_size - 1 - i] // right diag
+# x x x
+# x x x
+# x x x
 def check_board(board):
 	grid = board.grid
 	board_size = board.size
-	top  = [grid[0][i] for i in range (0, board_size)]
-	left = [grid[i][0] for i in range (0, board_size)]
-	left_diagonal = [grid[i][i] for i in range (0, board_size)]
-	right_diagonal = [grid[i][board_size -1 - i] for i in range (0, board_size)]
-	return winning_piece(top, left, left_diagonal, right_diagonal)
+
+	left_diag = [grid[i][i] for i in range (0, board_size)]
+	right_diag = [grid[i][board_size - 1 - i] for i in range (0, board_size)]
+
+	# Check columns
+	for i in range(0, board_size):
+		column = None
+		for j in range(0, board_size):
+			current_character = grid[j][i]
+			if(current_character != '$'):
+				if(not column or current_character == column):
+					column = current_character
+				else:
+					break
+			else:
+				break
+		if(column):
+			return column
+
+	for i in range(0, board_size):
+		row = None
+		for j in range(0, board_size):
+			current_character = grid[i][j]
+			if(current_character != '$'):
+				if(not row or current_character == row):
+					row = current_character
+				else:
+					break
+			else:
+				break
+		if(row):
+			return row
+
+
+
+
 
 def main():
 	board = Board(3)
-	check_board(board)
-
+	board.add_move('O', 0, 0)
+	board.add_move('O', 0, 1)
+	board.add_move('O', 0, 2)
+	board.print_board()
 
 if __name__ == "__main__":
 	main()
