@@ -21,10 +21,10 @@ class Board:
 
 	def draw(self):
 		for i in range(0, self.size):
-			print('\n-----------')
+			print('\n' + "----" * self.size)
 			for j in range(0, self.size):
 				print(self.grid[i][j] + ' |', end=" ")
-		print('\n-----------\n')
+		print('\n'+ "----" * self.size +'\n')
 
 def check_board(board):
 	grid = board.grid
@@ -68,18 +68,6 @@ def check_board(board):
 
 	if(len(right_diag) == 1 and right_diag[0] != board.terminal):
 		return right_diag[0]
-
-def main():
-	board = Board(3)
-	board.add_move('X', 0, 0)
-	board.add_move('X', 0, 1)
-	board.add_move('X', 0, 2)
-	board.draw()
-
-	print(check_board(board))
-
-if __name__ == "__main__":
-	main()
 
 
 
