@@ -26,15 +26,8 @@ class Board:
 			print('\n-----------')
 			for j in range(0, self.size):
 				print(self.grid[i][j] + ' |', end=" ")
+		print('\n')
 
-# grid[0][i] top col
-# grid[i][0] left col
-# grid[i][board_size - 1] right col
-# grid[i][i] left diag
-# grid[i][board_size - 1 - i] // right diag
-# x x x
-# x x x
-# x x x
 def check_board(board):
 	grid = board.grid
 	board_size = board.size
@@ -51,8 +44,10 @@ def check_board(board):
 				if(not column or current_character == column):
 					column = current_character
 				else:
+					column = None
 					break
 			else:
+				column = None
 				break
 		if(column):
 			return column
@@ -65,22 +60,31 @@ def check_board(board):
 				if(not row or current_character == row):
 					row = current_character
 				else:
+					row = None
 					break
 			else:
+				row = None
 				break
 		if(row):
 			return row
 
+	left_diag = list(set(left_diag))
+	right_diag = list(set(right_diag))
 
+	if(len(left_diag) == 1 and left_diag[0] != '$'):
+		return left_diag[0]
 
-
+	if(len(right_diag) == 1 and right_diag[0] != '$'):
+		return right_diag[0]
 
 def main():
 	board = Board(3)
-	board.add_move('O', 0, 0)
-	board.add_move('O', 0, 1)
 	board.add_move('O', 0, 2)
+	board.add_move('O', 1, 1)
+	board.add_move('O', 2, 0)
 	board.print_board()
+
+	print(check_board(board))
 
 if __name__ == "__main__":
 	main()
