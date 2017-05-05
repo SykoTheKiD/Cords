@@ -2,8 +2,7 @@
 
 import sys
 
-def minimax(board, depth, player):
-	depth += 1
+def minimax(board, player):
 	player1 = board.pieces[0]
 	player2 = board.pieces[1]
 	empty_positions = board.empty_spots()
@@ -25,9 +24,9 @@ def minimax(board, depth, player):
 		board[x_coord][y_coord] = player
 		state = {}
 		if(player == player1):
-			score = minimax(board, depth, player2)
+			score = minimax(board, player2)
 		else:
-			score = minimax(board, depth, player1)
+			score = minimax(board, player1)
 
 		state[current] = score
 		board[x_coord][y_coord] = board.terminal
