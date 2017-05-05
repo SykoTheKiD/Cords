@@ -2,16 +2,6 @@
 
 import sys
 
-def score(board):
-	player1 = board.pieces[0]
-	player2 = board.pieces[1]
-	if (board.winner == player1):
-		return 10
-	elif (board.winner == player2):
-		return -10
-	else:
-		return 0
-
 def minimax(board, depth, player):
 	depth += 1
 	player1 = board.pieces[0]
