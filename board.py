@@ -26,6 +26,13 @@ class Board:
 				print(self.grid[i][j] + ' |', end=" ")
 		print('\n'+ "---+" * self.size + '\n')
 
+	def empty_spots(self):
+		ret = []
+		for i in range(0, self.size):
+			for j in range(0, self.size):
+				if(self.grid[i][j] == self.terminal):
+					ret.append((i,j))
+
 def check_board(board):
 	grid = board.grid
 	board_size = board.size
