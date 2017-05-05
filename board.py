@@ -21,10 +21,10 @@ class Board:
 
 	def draw(self):
 		for i in range(0, self.size):
-			print('\n' + "----" * self.size)
+			print('\n' + "---+" * self.size)
 			for j in range(0, self.size):
 				print(self.grid[i][j] + ' |', end=" ")
-		print('\n'+ "----" * self.size +'\n')
+		print('\n'+ "---+" * self.size + '\n')
 
 def check_board(board):
 	grid = board.grid
@@ -36,28 +36,24 @@ def check_board(board):
 
 	# Check columns and rows
 	for i in range(0, board_size):
-		column = None
-		row = None
+		prev_character_col = grid[0][i]
 		for j in range(0, board_size):
 			current_character_col = grid[j][i]
+			if(current_character_col == board.terminal or current_character_col != prev_character_col):
+				prev_character_col = None
+				break
+		if(prev_character_col):
+			return prev_character_col
+
+	for i in range(0, board_size):
+		prev_character_row = grid[i][0]
+		for j in range(0, board_size):
 			current_character_row = grid[i][j]
-			if(current_character_col != board.terminal and (not column or current_character_col == column)):
-				column = current_character_col
-			else:
-				column = None
+			if(current_character_row == board.terminal or current_character_row != prev_character_row):
+				prev_character_row = None
 				break
-
-			if(current_character_row != board.terminal and (not row or current_character_row == row)):
-				row = current_character_row
-			else:
-				row = None
-				break
-
-		if(column):
-			return column
-
-		if(row):
-			return row
+		if(prev_character_row):
+			return prev_character_row
 
 	# Check diagonals
 	left_diag = list(set(left_diag))
@@ -68,6 +64,3 @@ def check_board(board):
 
 	if(len(right_diag) == 1 and right_diag[0] != board.terminal):
 		return right_diag[0]
-
-
-
