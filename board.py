@@ -32,6 +32,7 @@ class Board:
 			for j in range(0, self.size):
 				if(self.grid[i][j] == self.terminal):
 					ret.append((i,j))
+		return ret
 
 def check_board(board):
 	grid = board.grid
