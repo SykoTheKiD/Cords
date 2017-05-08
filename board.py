@@ -34,6 +34,9 @@ class Board:
 					ret.append((i,j))
 		return ret
 
+	def reset_position(self, x, y):
+		self.grid[x][y] = self.terminal
+
 def check_board(board):
 	grid = board.grid
 	board_size = board.size
