@@ -21,10 +21,10 @@ class Board:
 
 	def draw(self):
 		for i in range(0, self.size):
-			print('\n' + "---+" * self.size)
+			print('\n' + "----" * self.size)
 			for j in range(0, self.size):
 				print(self.grid[i][j] + ' |', end=" ")
-		print('\n'+ "---+" * self.size + '\n')
+		print('\n'+ "----" * self.size + '\n')
 
 	def empty_spots(self):
 		ret = []
@@ -37,7 +37,6 @@ class Board:
 def check_board(board):
 	grid = board.grid
 	board_size = board.size
-
 	# Get diagonals
 	left_diag = [grid[i][i] for i in range (0, board_size)]
 	right_diag = [grid[i][board_size - 1 - i] for i in range (0, board_size)]
@@ -72,3 +71,9 @@ def check_board(board):
 
 	if(len(right_diag) == 1 and right_diag[0] != board.terminal):
 		return right_diag[0]
+
+	avail_positions = board.empty_spots()
+	if(len(avail_positions) == 0):
+		return "DRAW"
+	else:
+		return "IN_PROGRESS"
