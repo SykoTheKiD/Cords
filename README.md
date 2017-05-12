@@ -1,5 +1,4 @@
 # Cords
-Line up Xs and Os to win
 
 <img src="http://i.imgur.com/xCUK65D.png" height=300 width=300>
 
