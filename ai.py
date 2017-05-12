@@ -1,17 +1,22 @@
 # !/usr/local/bin/python3
 
 import sys
+import cnsts
+
 from board import check_board
 
-DRAW = 'DRAW'
-# move, score
 def minimax(board, player):
+	""" Uses the minimax algorithm to get the next best move
+        Args:
+            param1 (Board): the board in play
+            param2 (player): the player a move must be generated for
+			
+		Returns:
+			Returns a tuple of the form (best move, best score)
+			If best move is -1 then the board is complete and no move is possible
+	"""
 	player1, player2 = board.pieces
-	points = {
-		player1: 10,
-		player2: -10,
-		DRAW: 0
-	}
+	points = {player1: 10, player2: -10, cnsts.DRAW: 0}
 	best_move = -1
 	best_score = -sys.maxsize if (player == player1) else sys.maxsize
 	winner = check_board(board)
@@ -19,8 +24,8 @@ def minimax(board, player):
 		return (best_move, points[player1])
 	elif(winner == player2):
 		return (best_move, points[player2]) 
-	elif(winner == DRAW):
-		return (best_move, points[DRAW])
+	elif(winner == cnsts.DRAW):
+		return (best_move, points[cnsts.DRAW])
 	else:
 		empty_positions = board.empty_spots()
 		number_empty = len(empty_positions)
