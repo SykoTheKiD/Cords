@@ -6,17 +6,36 @@ def main():
 	board.add_move('X', 0, 0)
 	board.add_move('O', 1, 1)
 	board.add_move('X', 1, 0)
-
-	board.add_move('O', 2, 0)
-	board.add_move('X', 0, 2)
-	board.add_move('X', 1, 2)
-
-	board.add_move('O', 0, 1)
-	board.add_move('X', 2, 1)
-	# board.add_move('O', 2, 2)
 	board.draw()
+	move, score = minimax(board, 'O')
+	board.add_move('O', move[0], move[1])
+	board.draw()
+	board.add_move('X', 0, 1)
 
-	print(check_board(board))
+	move, score = minimax(board, 'O')
+	board.add_move('O', move[0], move[1])
+
+	board.draw()
 
 if __name__ == "__main__":
 	main()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
