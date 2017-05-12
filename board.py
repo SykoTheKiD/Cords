@@ -1,4 +1,5 @@
 # !/usr/local/bin/python3
+import cnsts
 
 class Board:
 
@@ -77,6 +78,6 @@ def check_board(board):
 
 	avail_positions = board.empty_spots()
 	if(len(avail_positions) == 0):
-		return "DRAW"
+		return cnsts.DRAW
 	else:
-		return "IN_PROGRESS"
+		return cnsts.IN_PROGRESS

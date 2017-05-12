@@ -1,7 +1,9 @@
 # !/usr/local/bin/python3
 
-from board import Board, check_board
+import cnsts
+
 from ai import minimax
+from board import Board, check_board
 
 def main():
 	board_size = 3
@@ -17,21 +19,25 @@ def main():
 		board.draw()
 
 		winner = check_board(board)
-		if(winner):
+		if(winner == 'X' or winner == 'O'):
 			print(winner + " won!")
+			break
+		elif(winner == cnsts.DRAW):
+			print('Draw!')
 			break
 
 		# Ask p2
-		# p2_move = input("Player 2 where do you want to place your O? i.e 2,3:\n")
 		print("P2 plays...\n")
 		score_res = minimax(board, board.pieces[1])
-		print(score_res)
 		p2_move = score_res[0]
 		board.add_move('O', p2_move[0], p2_move[1])
 		# check board
 		winner = check_board(board)
-		if(winner):
+		if(winner == 'X' or winner == 'O'):
 			print(winner + " won!")
+			break
+		elif(winner == cnsts.DRAW):
+			print('Draw!')
 			break
 		# end game or not
 	board.draw()
