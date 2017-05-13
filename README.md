@@ -6,4 +6,4 @@
 
 ### How do I get set up? ###
 
-* Run **game.py** with **Python 3**
+* Run **cli.py** with **Python 3** to play the game in IDLE/Terminal
